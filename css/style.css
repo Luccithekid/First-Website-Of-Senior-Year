@@ -60,9 +60,13 @@ body {
   background: #008C45;
 }
 
-footer {
+footer .p {
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.85);
   text-align: center;
-  margin: 24px 0;
-  color: #008c45;
-  font-size: 0.9rem;
+  padding: 16px 0;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
 }
