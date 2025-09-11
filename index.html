@@ -7,13 +7,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Forum&family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
   <div class="container">
     <div class="branding">
       <h1>Vince McMahon</h1>
-      <img src="img/vince-mc-mahon-entrance-343531421.gif" alt="Vince McMahon" style="width:200px;border-radius:12px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,0.15);">
+  <img id="vince-img" src="img/vince-mc-mahon-entrance-343531421.gif" alt="Vince McMahon" style="width:200px;border-radius:12px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer;">
+  <audio id="vince-audio" src="WWE_Mr.McMahon Theme _No Chance In Hell_ [CD Quality + Download Link].mp3"></audio>
       <p style="font-size:1.2rem;max-width:600px;margin:0 auto 24px auto;color:#222;">Vince McMahon is an American businessman, media proprietor, and professional wrestling promoter. He is best known as the former chairman and CEO of WWE, the world's largest professional wrestling company. McMahon revolutionized the wrestling industry, turning WWE into a global entertainment powerhouse.</p>
     </div>
     <nav class="menu">
@@ -27,4 +28,17 @@
     <p style="text-align:center;color:#333;">© Luke Petitos First Website Of Senior Year</p>
   </footer>
 </body>
+<script>
+  const vinceImg = document.getElementById('img/vince-mc-mahon-entrance-343531421.gif');
+  const vinceAudio = document.getElementById('WWE_Mr.McMahon Theme _No Chance In Hell_ [CD Quality + Download Link].mp3');
+  vinceImg.addEventListener('click', () => {
+    if (vinceAudio.paused) {
+      vinceAudio.currentTime = 0;
+      vinceAudio.play();
+    } else {
+      vinceAudio.pause();
+      vinceAudio.currentTime = 0;
+    }
+  });
+</script>
 </html>
