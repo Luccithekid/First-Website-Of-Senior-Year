@@ -13,7 +13,15 @@
   <div class="container">
     <div class="branding">
       <h1>Vince McMahon</h1>
-  <img id="vince-img" src="img/vince-mc-mahon-entrance-343531421.gif" alt="Vince McMahon" style="width:200px;border-radius:12px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer;">
+  <div style="text-align:center;">
+    <img id="vince-img" src="img/vince-mc-mahon-entrance-343531421.gif" alt="Vince McMahon" style="width:200px;border-radius:12px;margin:20px 0;box-shadow:0 2px 12px rgba(0,0,0,0.15);cursor:pointer;display:inline-block;">
+    <video id="vince-video" width="300" style="display:none;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.15);margin:20px 0;" controls>
+      <source src="videoplayback.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <br>
+    <button id="close-video-btn" style="margin:10px auto 0 auto;display:none;">Close Video</button>
+  </div>
   <audio id="vince-audio" src="WWE_Mr.McMahon Theme _No Chance In Hell_ [CD Quality + Download Link].mp3"></audio>
       <p style="font-size:1.2rem;max-width:600px;margin:0 auto 24px auto;color:#222;">Vince McMahon is an American businessman, media proprietor, and professional wrestling promoter. He is best known as the former chairman and CEO of WWE, the world's largest professional wrestling company. McMahon revolutionized the wrestling industry, turning WWE into a global entertainment powerhouse.</p>
     </div>
@@ -22,6 +30,7 @@
       <a href="https://www.wwe.com/superstars/vincemcmahon" target="_blank"><button>WWE Profile</button></a>
       <a href="" target="_blank"><button>Matches</button></a>
       <a href="" target="_blank"><button>Storylines</button></a>
+      <button id="show-video-btn" style="display:inline-block;">Show Vince Video</button>
     </nav>
   </div>
   <footer>
@@ -29,9 +38,29 @@
   </footer>
 </body>
 <script>
-  const vinceImg = document.getElementById('img/vince-mc-mahon-entrance-343531421.gif');
-  const vinceAudio = document.getElementById('WWE_Mr.McMahon Theme _No Chance In Hell_ [CD Quality + Download Link].mp3');
+  const vinceImg = document.getElementById('vince-img');
+  const vinceAudio = document.getElementById('vince-audio');
+  // Duration of the GIF in milliseconds (adjust as needed)
+  const gifDuration = 3000; // 3 seconds, change if your GIF is longer/shorter
+  // Array of images to cycle through after the GIF
+  const images = [
+    'img/giphy-1884021005.gif',
+    'img/200-2906910793.gif',
+    'img/tumblr_p1mmcxlAsK1wo0mn6o1_400-4222318844.gif',
+    'img/HFn1mCm-2533967838.gif',
+    'img/icegif-516-105215074.gif'
+  ];
+  let currentImg = 0;
+
   vinceImg.addEventListener('click', () => {
+    if (vinceImg.style.display === 'none') return; // Don't trigger if hidden
+    vinceImg.src = 'img/vince-mc-mahon-entrance-343531421.gif';
+    // Always advance to next image after GIF duration, regardless of audio state
+    setTimeout(() => {
+      vinceImg.src = images[currentImg];
+      currentImg = (currentImg + 1) % images.length;
+    }, gifDuration);
+    // Play or pause audio as before
     if (vinceAudio.paused) {
       vinceAudio.currentTime = 0;
       vinceAudio.play();
@@ -39,6 +68,35 @@
       vinceAudio.pause();
       vinceAudio.currentTime = 0;
     }
+  });
+
+  // Video button logic for local video
+  const vinceVideo = document.getElementById('vince-video');
+  const showVideoBtn = document.getElementById('show-video-btn');
+  const closeVideoBtn = document.getElementById('close-video-btn');
+  let lastImgSrc = vinceImg.src;
+
+  showVideoBtn.addEventListener('click', () => {
+    lastImgSrc = vinceImg.src;
+    vinceImg.style.display = 'none';
+    vinceVideo.style.display = 'inline-block';
+    closeVideoBtn.style.display = 'inline-block';
+    showVideoBtn.style.display = 'none';
+    vinceVideo.currentTime = 0;
+    vinceVideo.play();
+  });
+
+  closeVideoBtn.addEventListener('click', () => {
+    vinceVideo.pause();
+    vinceVideo.style.display = 'none';
+    closeVideoBtn.style.display = 'none';
+    vinceImg.style.display = 'inline-block';
+    vinceImg.src = lastImgSrc;
+    showVideoBtn.style.display = 'inline-block';
+  });
+
+  vinceVideo.addEventListener('ended', () => {
+    closeVideoBtn.click();
   });
 </script>
 </html>
